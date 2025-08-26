@@ -87,10 +87,10 @@ class MxpaHttpHandler implements HttpHandler {
             return false;
         }
 
-        boolean isDll = httpRequestToBeSent.pathWithoutQuery().endsWith(".dll");
+        boolean validPath = httpRequestToBeSent.pathWithoutQuery().endsWith("/xparequester");
         boolean hasSessionParameterUrl = httpRequestToBeSent.hasParameter("SESSION", HttpParameterType.URL);
         boolean hasSessionParameterBody = httpRequestToBeSent.hasParameter("SESSION", HttpParameterType.BODY);
 
-        return (isDll && hasSessionParameterUrl) || (isDll && hasSessionParameterBody);
+        return (validPath && hasSessionParameterUrl) || (validPath && hasSessionParameterBody);
     }
 }

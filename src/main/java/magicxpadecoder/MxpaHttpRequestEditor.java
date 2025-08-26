@@ -111,17 +111,17 @@ class MxpaHttpRequestEditor implements ExtensionProvidedHttpRequestEditor {
     public boolean isEnabledFor(HttpRequestResponse requestResponse) {
         boolean res;
         boolean header;
+        boolean validPath;
 
         try {
-            // header =
-            // requestResponse.request().hasHeader("MgxpaRIAglobalUniqueSessionID");
-            header = requestResponse.request().pathWithoutQuery().endsWith(".dll");
+            header = requestResponse.request().hasHeader("MgxpaRIAglobalUniqueSessionID");
+            validPath = requestResponse.request().pathWithoutQuery().endsWith("/xparequester");
         } catch (Exception ex) {
             return false;
         }
 
-        res = (header && requestResponse.request().hasParameter("DATA", HttpParameterType.URL)) ||
-                (header && requestResponse.request().hasParameter("DATA", HttpParameterType.BODY));
+        res = (header && validPath && requestResponse.request().hasParameter("DATA", HttpParameterType.URL)) ||
+                (header && validPath && requestResponse.request().hasParameter("DATA", HttpParameterType.BODY));
 
         return res;
     }

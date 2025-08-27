@@ -62,7 +62,7 @@ class MxpaHttpResponseEditor implements ExtensionProvidedHttpResponseEditor {
 
         HttpRequest request = requestResponse.request();
         if (request != null) {
-            return !request.method().equalsIgnoreCase("OPTIONS") && request.pathWithoutQuery().endsWith(".dll");
+            return !request.method().equalsIgnoreCase("OPTIONS") && request.pathWithoutQuery().endsWith("/xparequester");
         }
 
         return requestResponse.response().hasHeader("MgxpaNextSessionCounter") &&
